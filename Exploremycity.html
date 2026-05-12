@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Explore My City – Pune</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --saffron:#E8520A;--saffron-light:#FEF0E7;--saffron-dark:#B53D07;
+  --gold:#C9920A;--gold-light:#FDF6E3;--gold-mid:#F5C842;
+  --teal:#0A7B6C;--teal-light:#DFF5F1;--teal-dark:#065548;
+  --plum:#6B3FA0;--plum-light:#F0EAF9;--plum-dark:#4A2870;
+  --rose:#C42B5A;--rose-light:#FCEAF1;
+  --indigo:#2D4EAA;--indigo-light:#EAF0FC;
+  --forest:#2D6A3F;--forest-light:#E6F5EB;
+  --dark:#12100E;--dark2:#1E1A16;--dark3:#2C2620;
+  --text:#2E2519;--muted:#685A4A;--faint:#9B8C7C;
+  --border:rgba(46,37,25,0.1);--bg:#FDFAF7;--white:#FFFFFF;--nav-h:70px;
+}
+[data-theme="dark"]{
+  --text:#E8E3DC;--muted:#B8AFA0;--faint:#8A7F70;
+  --border:rgba(255,255,255,0.1);--bg:#0F0E0D;--white:#1A1816;
+  --dark:#E8E3DC;--dark2:#D0C9BE;--dark3:#B8AFA0;
+  --saffron-light:rgba(232,82,10,0.15);--teal-light:rgba(10,123,108,0.15);
+  --plum-light:rgba(107,63,160,0.15);--gold-light:rgba(201,146,10,0.15);
+  --rose-light:rgba(196,43,90,0.15);--indigo-light:rgba(45,78,170,0.15);
+  --forest-light:rgba(45,106,63,0.15);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(--text);line-height:1.65;-webkit-font-smoothing:antialiased}
+.serif{font-family:'Cormorant Garamond',serif}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;height:var(--nav-h);background:rgba(253,250,247,0.94);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 6%}
+[data-theme="dark"] nav{background:rgba(15,14,13,0.94)}
+.theme-toggle{background:var(--bg);border:1.5px solid var(--border);border-radius:50%;width:38px;height:38px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:18px;transition:all .3s;margin-left:20px}
+.theme-toggle:hover{transform:rotate(20deg);border-color:var(--saffron)}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:700;color:var(--saffron);letter-spacing:-0.3px;line-height:1}
+.nav-logo small{font-family:'Plus Jakarta Sans',sans-serif;font-size:10px;font-weight:500;color:var(--muted);display:block;letter-spacing:2px;text-transform:uppercase;margin-top:1px}
+.nav-links{display:flex;gap:30px;list-style:none}
+.nav-links a{text-decoration:none;font-size:13px;font-weight:500;color:var(--muted);transition:color .2s}
+.nav-links a:hover{color:var(--saffron)}
+.nav-cta{background:var(--saffron)!important;color:#fff!important;padding:8px 20px;border-radius:100px;font-size:13px!important;font-weight:600!important}
+.nav-cta:hover{background:var(--saffron-dark)!important}
+
+/* HERO STATIC */
+.hero{position:relative;height:100vh;min-height:600px;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.hero img.hero-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.hero .cs-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,.18) 0%,rgba(0,0,0,.55) 60%,rgba(0,0,0,.75) 100%)}
+@keyframes csIn{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:none}}
+.cs-content{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 6%;padding-top:var(--nav-h);z-index:2;animation:csIn .9s ease forwards}
+.cs-tag{display:inline-flex;align-items:center;gap:7px;background:rgba(232,82,10,.85);border-radius:100px;padding:5px 16px;font-size:11px;font-weight:700;color:#fff;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:20px;backdrop-filter:blur(4px)}
+.cs-content h1{font-family:'Cormorant Garamond',serif;font-size:clamp(40px,7vw,88px);font-weight:700;color:#fff;line-height:1.05;margin-bottom:16px;text-shadow:0 2px 20px rgba(0,0,0,.4)}
+.cs-content h1 em{font-style:italic;color:#F5C842}
+.cs-content p{font-size:clamp(14px,2vw,18px);color:rgba(255,255,255,.85);max-width:560px;line-height:1.75;margin-bottom:32px;text-shadow:0 1px 8px rgba(0,0,0,.4)}
+.cs-btns{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
+.cs-meta{display:flex;gap:16px;flex-wrap:wrap;justify-content:center;margin-top:20px}
+.cs-meta span{background:rgba(255,255,255,.15);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.25);border-radius:100px;padding:5px 14px;font-size:12px;font-weight:600;color:#fff;letter-spacing:.3px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:13px 26px;border-radius:100px;font-size:14px;font-weight:600;text-decoration:none;border:none;cursor:pointer;font-family:inherit;transition:all .22s}
+.btn-sf{background:var(--saffron);color:#fff;box-shadow:0 4px 22px rgba(232,82,10,.35)}
+.btn-sf:hover{background:var(--saffron-dark);transform:translateY(-2px)}
+.btn-ol{background:rgba(255,255,255,.15);color:#fff;border:1.5px solid rgba(255,255,255,.5);backdrop-filter:blur(4px)}
+.btn-ol:hover{background:rgba(255,255,255,.25);border-color:#fff}
+@keyframes floatY{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+
+/* STATS */
+.stats{background:var(--dark);display:flex;flex-wrap:wrap;justify-content:center;overflow:hidden}
+.stat{flex:1;min-width:130px;text-align:center;padding:28px 16px;border-right:1px solid rgba(255,255,255,.07);transition:background .3s}
+.stat:last-child{border-right:none}
+.stat:hover{background:rgba(255,255,255,.04)}
+.stat-n{font-family:'Cormorant Garamond',serif;font-size:34px;font-weight:700;line-height:1}
+.stat:nth-child(1) .stat-n{color:#F5C842}
+.stat:nth-child(2) .stat-n{color:#7EC8A0}
+.stat:nth-child(3) .stat-n{color:#C49DE8}
+.stat:nth-child(4) .stat-n{color:#F4967A}
+.stat:nth-child(5) .stat-n{color:#7AB8F5}
+.stat-l{font-size:11px;color:rgba(255,255,255,.4);font-weight:500;letter-spacing:.8px;text-transform:uppercase;margin-top:4px}
+
+/* SEARCH */
+.search-outer{background:linear-gradient(135deg,#fff9f5 0%,#fff 60%,#f0f4ff 100%);padding:44px 6% 40px;border-bottom:1px solid rgba(0,0,0,.06)}
+[data-theme="dark"] .search-outer{background:linear-gradient(135deg,#1a1410 0%,#0f0e0d 60%,#0d1020 100%)}
+.search-layout{display:grid;grid-template-columns:1fr 380px;gap:32px;align-items:start;max-width:1160px}
+.search-inner{background:var(--white);border-radius:24px;padding:28px 32px 24px;box-shadow:0 8px 40px rgba(0,0,0,.07),0 1px 3px rgba(0,0,0,.04);border:1px solid rgba(0,0,0,.06)}
+[data-theme="dark"] .search-inner{box-shadow:0 8px 40px rgba(0,0,0,.3);border-color:rgba(255,255,255,.08)}
+.search-heading{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:700;color:var(--dark);margin-bottom:4px}
+.search-sub{font-size:12px;color:var(--muted);margin-bottom:18px}
+.search-row{display:flex;gap:0;background:var(--bg);border:2px solid var(--border);border-radius:14px;overflow:hidden;transition:all .25s;box-shadow:0 2px 12px rgba(0,0,0,.04)}
+.search-row:focus-within{border-color:#ff6b00;box-shadow:0 0 0 4px rgba(255,107,0,.1)}
+.search-icon{display:flex;align-items:center;padding:0 14px 0 18px;color:var(--faint);font-size:17px;flex-shrink:0}
+.search-row input{flex:1;border:none;outline:none;padding:14px 8px;font-family:inherit;font-size:14px;color:var(--text);background:transparent;min-width:0}
+.search-row input::placeholder{color:var(--faint)}
+.search-sep{width:1px;background:var(--border);margin:10px 0;flex-shrink:0}
+.search-row select{border:none;outline:none;padding:0 14px;font-family:inherit;font-size:13px;color:var(--muted);background:transparent;cursor:pointer;min-width:120px;flex-shrink:0}
+.search-btn{background:linear-gradient(135deg,#ff6b00,#e8520a);border:none;padding:12px 22px;color:#fff;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;transition:all .25s;display:flex;align-items:center;gap:6px;white-space:nowrap;letter-spacing:.3px;margin:5px;border-radius:10px}
+.search-btn:hover{background:linear-gradient(135deg,#e85f00,#b53d07);transform:translateY(-1px);box-shadow:0 4px 16px rgba(232,82,10,.35)}
+#searchResultsInfo{font-size:13px;color:var(--muted);margin-top:10px;display:none;padding:8px 12px;background:var(--saffron-light);border-radius:8px;border-left:3px solid var(--saffron)}
+.search-divider{height:1px;background:var(--border);margin:18px 0}
+.chips-label{font-size:10px;font-weight:700;letter-spacing:1.8px;text-transform:uppercase;color:var(--faint);margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.chips-label::after{content:'';flex:1;height:1px;background:var(--border)}
+.chips{display:flex;gap:7px;flex-wrap:wrap}
+.chip{font-size:12px;color:var(--muted);background:var(--bg);border:1.5px solid var(--border);border-radius:100px;padding:6px 14px;cursor:pointer;transition:all .22s;font-weight:600;display:inline-flex;align-items:center;gap:5px}
+.chip:hover{background:var(--saffron-light);border-color:#ff6b00;color:#ff6b00;transform:translateY(-2px);box-shadow:0 4px 12px rgba(255,107,0,.15)}
+/* search side image */
+.search-side{border-radius:22px;overflow:hidden;position:relative;height:100%;min-height:340px}
+.search-side img{width:100%;height:100%;object-fit:cover;display:block;border-radius:22px;transition:transform .4s}
+.search-side:hover img{transform:scale(1.03)}
+.search-side-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.7) 0%,rgba(0,0,0,.1) 55%);border-radius:22px}
+.search-side-body{position:absolute;bottom:0;left:0;right:0;padding:22px}
+.search-side-tag{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.7);margin-bottom:6px}
+.search-side-title{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:700;color:#fff;margin-bottom:4px}
+.search-side-sub{font-size:12px;color:rgba(255,255,255,.65)}
+@media(max-width:960px){.search-layout{grid-template-columns:1fr}.search-side{min-height:220px}}
+
+/* SECTIONS */
+.section{padding:80px 6%}
+.si{max-width:1160px;margin:0 auto}
+.shd{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:42px;flex-wrap:wrap;gap:14px}
+.slbl{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:8px}
+.stit{font-family:'Cormorant Garamond',serif;font-size:clamp(30px,4vw,46px);font-weight:700;line-height:1.12;margin-bottom:10px}
+.ssub{font-size:15px;max-width:520px;line-height:1.75;color:var(--muted)}
+.va{font-size:13px;font-weight:600;text-decoration:none;display:flex;align-items:center;gap:4px;transition:gap .2s}
+.va:hover{gap:8px}
+
+/* CATEGORIES */
+.cat-section{background:var(--white)}
+.cat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:12px}
+.cat-card{border-radius:18px;padding:22px 14px;text-align:center;cursor:pointer;transition:all .25s;text-decoration:none;border:1.5px solid transparent}
+.cat-card:nth-child(1){background:var(--saffron-light)}.cat-card:nth-child(1):hover{border-color:var(--saffron);transform:translateY(-4px)}
+.cat-card:nth-child(2){background:var(--teal-light)}.cat-card:nth-child(2):hover{border-color:var(--teal);transform:translateY(-4px)}
+.cat-card:nth-child(3){background:var(--plum-light)}.cat-card:nth-child(3):hover{border-color:var(--plum);transform:translateY(-4px)}
+.cat-card:nth-child(4){background:var(--gold-light)}.cat-card:nth-child(4):hover{border-color:var(--gold);transform:translateY(-4px)}
+.cat-card:nth-child(5){background:var(--rose-light)}.cat-card:nth-child(5):hover{border-color:var(--rose);transform:translateY(-4px)}
+.cat-card:nth-child(6){background:var(--forest-light)}.cat-card:nth-child(6):hover{border-color:var(--forest);transform:translateY(-4px)}
+.cat-card:nth-child(7){background:var(--indigo-light)}.cat-card:nth-child(7):hover{border-color:var(--indigo);transform:translateY(-4px)}
+.cat-card:nth-child(8){background:var(--teal-light)}.cat-card:nth-child(8):hover{border-color:var(--teal);transform:translateY(-4px)}
+.cat-em{font-size:28px;margin-bottom:10px;display:block}
+.cat-nm{font-size:12px;font-weight:600;color:var(--dark)}
+
+/* PLACES */
+.places-section{background:var(--bg)}
+.places-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:24px}
+.pc{background:var(--white);border-radius:22px;border:1px solid var(--border);overflow:hidden;cursor:pointer;transition:transform .3s,box-shadow .3s}
+.pc:hover{transform:translateY(-7px);box-shadow:0 22px 55px rgba(0,0,0,.09)}
+.pt{height:200px;display:flex;align-items:center;justify-content:center;font-size:74px;position:relative;background-size:cover;background-position:center;overflow:hidden}
+.pt img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
+.pt-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,0.1),rgba(0,0,0,0.3));z-index:1}
+.pt span{position:relative;z-index:2;text-shadow:0 2px 8px rgba(0,0,0,0.3)}
+.tb{position:absolute;top:14px;left:14px;background:rgba(255,255,255,.92);border-radius:100px;padding:4px 12px;font-size:10px;font-weight:700;color:var(--dark);letter-spacing:.5px;text-transform:uppercase}
+.tr{position:absolute;top:14px;right:14px;background:rgba(0,0,0,.55);border-radius:100px;padding:4px 10px;font-size:12px;font-weight:600;color:#fff}
+.pb{padding:20px}
+.pb h3{font-family:'Cormorant Garamond',serif;font-size:21px;font-weight:700;color:var(--dark);margin-bottom:5px}
+.view-details-btn{display:inline-flex;align-items:center;gap:6px;background:var(--saffron);color:#fff;border:none;padding:8px 18px;border-radius:100px;font-size:12px;font-weight:600;cursor:pointer;margin-top:10px;transition:all .2s;font-family:inherit}
+.view-details-btn:hover{background:var(--saffron-dark);transform:translateX(3px)}
+.pa{font-size:12px;color:var(--muted);margin-bottom:10px}
+.pd{font-size:13px;color:var(--muted);line-height:1.65;margin-bottom:14px}
+.ptags{display:flex;gap:6px;flex-wrap:wrap}
+.ptag{font-size:11px;font-weight:600;border-radius:100px;padding:3px 10px}
+.ptag-s{background:var(--saffron-light);color:var(--saffron)}
+.ptag-t{background:var(--teal-light);color:var(--teal)}
+.ptag-p{background:var(--plum-light);color:var(--plum)}
+#no-results{display:none;text-align:center;padding:60px;color:var(--muted);font-size:16px;grid-column:1/-1}
+
+/* FOOD */
+.food-section{background:linear-gradient(160deg,#12100E 0%,#1A2610 50%,#110A1C 100%)}
+.food-section .slbl{color:var(--gold-mid)}
+.food-section .stit{color:#fff}
+.food-section .ssub{color:rgba(255,255,255,.5)}
+.food-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:18px}
+.fc{border-radius:18px;overflow:hidden;border:1px solid rgba(255,255,255,.09);transition:transform .3s,border-color .3s}
+.fc:hover{transform:translateY(-5px);border-color:rgba(255,255,255,.22)}
+.fc:nth-child(1){background:linear-gradient(145deg,#2A1508,#1A0D04)}
+.fc:nth-child(2){background:linear-gradient(145deg,#0B2018,#051A10)}
+.fc:nth-child(3){background:linear-gradient(145deg,#1E1228,#110A1C)}
+.fc:nth-child(4){background:linear-gradient(145deg,#28200A,#1A1505)}
+.fc:nth-child(5){background:linear-gradient(145deg,#22091A,#160410)}
+.fc:nth-child(6){background:linear-gradient(145deg,#0A1828,#05101A)}
+.fc:nth-child(7){background:linear-gradient(145deg,#102210,#081508)}
+.fc:nth-child(8){background:linear-gradient(145deg,#261A06,#1A1004)}
+.fem{height:120px;display:flex;align-items:center;justify-content:center;font-size:58px;position:relative;background-size:cover;background-position:center;overflow:hidden}
+.fem img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
+.fem-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,0.2),rgba(0,0,0,0.5));z-index:1}
+.fem span{position:relative;z-index:2;text-shadow:0 2px 8px rgba(0,0,0,0.4)}
+.fbd{padding:16px}
+.fbd h3{font-size:15px;font-weight:600;color:#fff;margin-bottom:4px}
+.fbd .fhint{font-size:11px;color:rgba(255,255,255,.4);margin-bottom:8px}
+.fbd .fdsc{font-size:12px;color:rgba(255,255,255,.55);line-height:1.6;margin-bottom:12px}
+.fpr{font-size:11px;font-weight:700;border-radius:100px;padding:4px 12px;display:inline-block}
+.fc:nth-child(1) .fpr{background:rgba(232,82,10,.2);color:#F4967A}
+.fc:nth-child(2) .fpr{background:rgba(10,123,108,.2);color:#7EC8A0}
+.fc:nth-child(3) .fpr{background:rgba(107,63,160,.2);color:#C49DE8}
+.fc:nth-child(4) .fpr{background:rgba(201,146,10,.2);color:#F5C842}
+.fc:nth-child(5) .fpr{background:rgba(196,43,90,.2);color:#F08AB0}
+.fc:nth-child(6) .fpr{background:rgba(45,78,170,.2);color:#7AB8F5}
+.fc:nth-child(7) .fpr{background:rgba(45,106,63,.2);color:#8FCA9E}
+.fc:nth-child(8) .fpr{background:rgba(201,146,10,.2);color:#F5C842}
+
+/* GEMS */
+.gems-section{background:var(--bg)}
+.gems-section .slbl{color:var(--plum)}
+.gems-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.gc{border-radius:22px;overflow:hidden;position:relative;min-height:260px;display:flex;flex-direction:column;justify-content:flex-end;cursor:pointer;transition:transform .3s}
+.gc:hover{transform:scale(1.02)}
+.gc:first-child{grid-row:1/-1}
+.gbg{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:88px;z-index:0}
+.ggrad{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.82) 0%,transparent 55%);z-index:1}
+.gbody{position:relative;z-index:2;padding:22px}
+.gpill{font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;border-radius:100px;padding:3px 10px;margin-bottom:8px;display:inline-block}
+.gc:nth-child(1){background:linear-gradient(160deg,#1A0D2E,#2D1060)}.gc:nth-child(1) .gpill{background:rgba(107,63,160,.4);color:#C49DE8}
+.gc:nth-child(2){background:linear-gradient(160deg,#0A2018,#0D4030)}.gc:nth-child(2) .gpill{background:rgba(10,123,108,.4);color:#7EC8A0}
+.gc:nth-child(3){background:linear-gradient(160deg,#2A0E1A,#5A1030)}.gc:nth-child(3) .gpill{background:rgba(196,43,90,.4);color:#F08AB0}
+.gc:nth-child(4){background:linear-gradient(160deg,#0A1A30,#153060)}.gc:nth-child(4) .gpill{background:rgba(45,78,170,.4);color:#7AB8F5}
+.gc:nth-child(5){background:linear-gradient(160deg,#1A1A0A,#3A3010)}.gc:nth-child(5) .gpill{background:rgba(201,146,10,.4);color:#F5C842}
+.gbody h3{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:700;color:#fff;margin-bottom:5px}
+.gbody p{font-size:12px;color:rgba(255,255,255,.65);line-height:1.55}
+
+/* BUDGET */
+.budget-section{background:var(--white)}
+.budget-section .slbl{color:var(--teal)}
+.budget-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px}
+.bc{border-radius:18px;padding:22px;border:1.5px solid transparent;transition:all .25s}
+.bc:hover{transform:translateY(-4px);box-shadow:0 12px 34px rgba(0,0,0,.07)}
+.bc:nth-child(1){background:var(--forest-light);border-color:rgba(45,106,63,.15)}.bc:nth-child(1) .br{color:var(--forest)}
+.bc:nth-child(2){background:var(--indigo-light);border-color:rgba(45,78,170,.15)}.bc:nth-child(2) .br{color:var(--indigo)}
+.bc:nth-child(3){background:var(--rose-light);border-color:rgba(196,43,90,.15)}.bc:nth-child(3) .br{color:var(--rose)}
+.bc:nth-child(4){background:var(--gold-light);border-color:rgba(201,146,10,.15)}.bc:nth-child(4) .br{color:var(--gold)}
+.bc:nth-child(5){background:var(--teal-light);border-color:rgba(10,123,108,.15)}.bc:nth-child(5) .br{color:var(--teal)}
+.bc:nth-child(6){background:var(--saffron-light);border-color:rgba(232,82,10,.15)}.bc:nth-child(6) .br{color:var(--saffron)}
+.bc:nth-child(7){background:var(--plum-light);border-color:rgba(107,63,160,.15)}.bc:nth-child(7) .br{color:var(--plum)}
+.bc:nth-child(8){background:var(--forest-light);border-color:rgba(45,106,63,.15)}.bc:nth-child(8) .br{color:var(--forest)}
+.bem{font-size:28px;margin-bottom:12px}
+.bc h3{font-size:14px;font-weight:700;color:var(--dark);margin-bottom:5px}
+.bc p{font-size:12px;color:var(--muted);line-height:1.6;margin-bottom:12px}
+.br{font-size:12px;font-weight:700}
+
+/* MAP */
+.map-section{background:var(--bg)}
+.map-section .slbl{color:var(--indigo)}
+.map-wrap{border-radius:22px;overflow:hidden;border:1px solid var(--border);height:400px;background:linear-gradient(140deg,#EAF0FC,#DFF5F1,#F0EAF9);display:flex;align-items:center;justify-content:center;text-align:center;flex-direction:column;gap:16px}
+.map-wrap h3{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:700;color:var(--dark)}
+.map-wrap p{font-size:14px;color:var(--muted)}
+.map-pins{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;padding:0 20px}
+.map-pin{background:#fff;border:1px solid var(--border);border-radius:100px;padding:5px 14px;font-size:12px;font-weight:500;color:var(--text)}
+
+/* CONTACT */
+.contact-section{background:linear-gradient(155deg,#12100E 0%,#0A1E18 50%,#1A0D2E 100%)}
+.contact-section .slbl{color:var(--gold-mid)}
+.contact-section .stit{color:#fff}
+.cg{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start}
+.ci p{color:rgba(255,255,255,.55);font-size:15px;margin-bottom:28px;line-height:1.8}
+.cpts{display:flex;flex-direction:column;gap:14px}
+.cpt{display:flex;align-items:center;gap:12px;font-size:13px;color:rgba(255,255,255,.65)}
+.cico{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0}
+.cico.s{background:rgba(232,82,10,.18)}.cico.t{background:rgba(10,123,108,.18)}.cico.p{background:rgba(107,63,160,.18)}.cico.g{background:rgba(201,146,10,.18)}
+.cf{display:flex;flex-direction:column;gap:12px}
+.fi,.fsel,.fta{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.11);border-radius:12px;padding:14px 18px;color:#fff;font-family:inherit;font-size:14px;outline:none;transition:border-color .2s;width:100%}
+.fi::placeholder,.fta::placeholder{color:rgba(255,255,255,.3)}
+.fi:focus,.fsel:focus,.fta:focus{border-color:var(--saffron)}
+.fta{min-height:100px;resize:vertical}
+.fsel option{background:#1E1A16;color:#fff}
+.fsub{background:var(--saffron);border:none;padding:14px 28px;color:#fff;font-size:15px;font-weight:600;border-radius:12px;cursor:pointer;font-family:inherit;transition:all .2s;width:100%}
+.fsub:hover{background:var(--saffron-dark);transform:translateY(-1px)}
+.fsok{background:rgba(10,123,108,.2);border:1px solid var(--teal);border-radius:12px;padding:14px;color:#7EC8A0;font-size:14px;display:none;text-align:center}
+
+/* FOOTER */
+footer{background:#0A0806;padding:36px 6%;border-top:1px solid rgba(255,255,255,.06);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px}
+.flogo{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:700;color:var(--saffron)}
+.flinks{display:flex;gap:22px}
+.flinks a{font-size:12px;color:rgba(255,255,255,.35);text-decoration:none;transition:color .2s}
+.flinks a:hover{color:var(--saffron)}
+footer p{font-size:12px;color:rgba(255,255,255,.25)}
+
+/* MODAL */
+.overlay{display:none;position:fixed;inset:0;z-index:300;background:rgba(0,0,0,.65);backdrop-filter:blur(6px);align-items:center;justify-content:center;padding:20px}
+.overlay.open{display:flex}
+.modal{background:var(--white);border-radius:26px;max-width:520px;width:100%;overflow:hidden;animation:popIn .3s cubic-bezier(.34,1.56,.64,1)}
+@keyframes popIn{from{opacity:0;transform:scale(.88)}to{opacity:1;transform:scale(1)}}
+.mtop{height:280px;display:flex;align-items:center;justify-content:center;font-size:96px;position:relative;background-size:cover;background-position:center}
+.mtop img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
+.mtop-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,0.2),rgba(0,0,0,0.4));z-index:1}
+.mtop span{position:relative;z-index:2;text-shadow:0 3px 12px rgba(0,0,0,0.5)}
+.mclose{position:absolute;top:14px;right:14px;background:rgba(0,0,0,.45);border:none;border-radius:50%;width:32px;height:32px;color:#fff;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.mbdg{position:absolute;bottom:14px;left:18px;background:#fff;border-radius:100px;padding:4px 12px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px}
+.mbd{padding:24px;max-height:400px;overflow-y:auto}
+.mbd h2{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:700;color:var(--dark);margin-bottom:4px}
+.marea{font-size:12px;color:var(--muted);margin-bottom:12px}
+.mbd p{font-size:14px;color:var(--muted);line-height:1.7;margin-bottom:18px}
+.mmeta{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px}
+.mhistory{background:var(--bg);border-radius:12px;padding:14px;margin-bottom:16px}
+.mhistory .lbl{font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+.mhistory .txt{font-size:13px;color:var(--text);line-height:1.7}
+.mm{background:var(--bg);border-radius:12px;padding:12px}
+.mm .lbl{font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
+.mm .val{font-size:14px;font-weight:600;color:var(--dark)}
+.macts{display:flex;gap:10px}
+
+/* FILTER BAR */
+.filter-bar{display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+.filter-label{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--faint);margin-right:2px}
+.fbtn{font-family:inherit;font-size:12px;font-weight:600;padding:7px 15px;border-radius:100px;border:1.5px solid var(--border);background:var(--bg);color:var(--muted);cursor:pointer;transition:all .22s;display:inline-flex;align-items:center;gap:5px}
+.fbtn:hover{border-color:#ff6b00;color:#ff6b00;background:var(--saffron-light);transform:translateY(-2px);box-shadow:0 4px 12px rgba(255,107,0,.12)}
+.fbtn.active{background:linear-gradient(135deg,#ff6b00,#e8520a);color:#fff;border-color:transparent;box-shadow:0 4px 14px rgba(232,82,10,.3);transform:translateY(-1px)}
+
+/* EXPLORE BY AREA */
+.area-section{background:var(--white);padding:70px 6%}
+.area-section .slbl{color:var(--indigo)}
+.area-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px}
+.area-card{border-radius:20px;overflow:hidden;position:relative;height:180px;cursor:pointer;transition:transform .3s,box-shadow .3s}
+.area-card:hover{transform:translateY(-6px);box-shadow:0 20px 50px rgba(0,0,0,.15)}
+.area-card img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s}
+.area-card:hover img{transform:scale(1.07)}
+.area-card-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.75) 0%,rgba(0,0,0,.1) 60%)}
+.area-card-body{position:absolute;bottom:0;left:0;right:0;padding:16px}
+.area-card-name{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:700;color:#fff;line-height:1.1;margin-bottom:3px}
+.area-card-tag{font-size:10px;font-weight:600;color:rgba(255,255,255,.7);letter-spacing:.8px;text-transform:uppercase}
+.area-card-count{position:absolute;top:12px;right:12px;background:rgba(255,255,255,.18);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.25);border-radius:100px;padding:3px 10px;font-size:11px;font-weight:700;color:#fff}
+
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .6s ease,transform .6s ease}
+.reveal.vis{opacity:1;transform:none}
+
+@media(max-width:768px){
+  .stats{flex-wrap:wrap}.stat{min-width:50%;border-bottom:1px solid rgba(255,255,255,.07)}
+  .gems-grid{grid-template-columns:1fr}.gc:first-child{grid-row:auto}
+  .cg{grid-template-columns:1fr;gap:32px}.mmeta{grid-template-columns:1fr}
+  .nav-links{display:none}
+  .search-inner{padding:20px 18px 18px}
+  .search-row{flex-wrap:wrap;border-radius:12px}
+  .search-row input{width:100%;border-radius:12px 12px 0 0;padding:13px 14px}
+  .search-sep{display:none}
+  .search-row select{width:50%;border-top:1px solid var(--border);border-radius:0 0 0 12px;padding:10px 12px}
+  .search-btn{width:50%;border-radius:0 0 12px 0;justify-content:center;margin:0}
+  .search-icon{display:none}
+  .chips{flex-wrap:nowrap;overflow-x:auto;padding-bottom:4px;-webkit-overflow-scrolling:touch}
+  .chips::-webkit-scrollbar{display:none}
+  .filter-bar{flex-wrap:nowrap;overflow-x:auto;padding-bottom:4px;-webkit-overflow-scrolling:touch}
+  .filter-bar::-webkit-scrollbar{display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Explore Pune<small>Maharashtra · India</small></div>
+  <ul class="nav-links">
+    <li><a href="#places">Attractions</a></li>
+    <li><a href="#food">Food</a></li>
+    <li><a href="#gems">Hidden Gems</a></li>
+    <li><a href="#budget">Budget</a></li>
+    <li><a href="#areas">Areas</a></li>
+    <li><a href="#contact" class="nav-cta">Feedback</a></li>
+  </ul>
+  <div class="theme-toggle" onclick="toggleTheme()" title="Toggle Dark Mode">🌙</div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <img class="hero-bg" src="https://images.unsplash.com/photo-1587474260584-136574528ed5?w=1400&q=80" alt="Shaniwar Wada Pune" loading="eager"/>
+  <div class="cs-overlay"></div>
+  <div class="cs-content">
+    <div class="cs-tag"><span>&#127983;</span> Heritage Fort &middot; Pune</div>
+    <h1>Discover the <em>Soul</em><br>of Pune</h1>
+    <p>Your complete guide to Pune's history, vibrant food, hidden retreats, and budget-friendly adventures.</p>
+    <div class="cs-btns">
+      <a href="#places" class="btn btn-sf">Start Exploring &rarr;</a>
+      <a href="#gems" class="btn btn-ol">Hidden Gems &#10024;</a>
+    </div>
+    <div class="cs-meta">
+      <span>&#128205; Shaniwar Peth, Pune</span>
+      <span>&#9201; 8 AM &ndash; 6:30 PM</span>
+      <span>&#11088; 4.6 / 5</span>
+      <span>&#127981; Entry &#8377;25</span>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stat"><div class="stat-n">50+</div><div class="stat-l">Tourist Spots</div></div>
+  <div class="stat"><div class="stat-n">80+</div><div class="stat-l">Food &amp; Cafes</div></div>
+  <div class="stat"><div class="stat-n">25+</div><div class="stat-l">Hidden Gems</div></div>
+  <div class="stat"><div class="stat-n">40+</div><div class="stat-l">Budget Picks</div></div>
+  <div class="stat"><div class="stat-n">5L+</div><div class="stat-l">Students &amp; Visitors</div></div>
+</div>
+
+<!-- SEARCH -->
+<div class="search-outer">
+  <div class="search-layout">
+    <div class="search-inner">
+      <div class="search-heading">Find Your Next Adventure</div>
+      <div class="search-sub">Search by place name, area, or category across all of Pune</div>
+      <div class="search-row">
+        <span class="search-icon">&#128269;</span>
+        <input type="text" id="searchInput" placeholder="e.g. Sinhagad Fort, Koregaon Park, trekking..." oninput="liveSearch()"/>
+        <div class="search-sep"></div>
+        <select id="filterCat" onchange="runSearch()">
+          <option value="">All Categories</option>
+          <option value="fort">Forts</option>
+          <option value="history">Historical</option>
+          <option value="nature">Nature</option>
+          <option value="trek">Trekking</option>
+          <option value="wellness">Wellness</option>
+          <option value="family">Family</option>
+          <option value="caves">Caves</option>
+        </select>
+        <button class="search-btn" onclick="runSearch()">&#128269; Search</button>
+      </div>
+      <div id="searchResultsInfo"></div>
+      <div class="search-divider"></div>
+      <div class="chips-label">Quick Search</div>
+      <div class="chips">
+        <span class="chip" onclick="quickSearch('Shaniwar Wada')">&#127983; Shaniwar Wada</span>
+        <span class="chip" onclick="quickSearch('fort')">&#127963; Forts</span>
+        <span class="chip" onclick="quickSearch('trek')">&#129406; Trekking</span>
+        <span class="chip" onclick="quickSearch('koregaon')">&#128205; Koregaon Park</span>
+        <span class="chip" onclick="quickSearch('sinhagad')">&#127956; Sinhagad</span>
+        <span class="chip" onclick="quickSearch('nature')">&#127807; Nature</span>
+        <span class="chip" onclick="quickSearch('history')">&#127963; Historical</span>
+        <span class="chip" onclick="quickSearch('family')">&#128106; Family</span>
+      </div>
+      <div class="search-divider"></div>
+      <div class="filter-bar">
+        <span class="filter-label">Filter by:</span>
+        <button class="fbtn active" data-filter="">&#10003; All</button>
+        <button class="fbtn" data-filter="historical">&#127963; Historical</button>
+        <button class="fbtn" data-filter="fort">&#127983; Forts</button>
+        <button class="fbtn" data-filter="nature">&#127807; Nature</button>
+        <button class="fbtn" data-filter="trek">&#129406; Trekking</button>
+        <button class="fbtn" data-filter="family">&#128106; Family</button>
+        <button class="fbtn" data-filter="wellness">&#129496; Wellness</button>
+        <button class="fbtn" data-filter="free">&#127193; Free Entry</button>
+      </div>
+    </div>
+    <div class="search-side">
+      <img src="https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?w=800&q=80" alt="Sinhagad Fort Pune" loading="lazy"/>
+      <div class="search-side-overlay"></div>
+      <div class="search-side-body">
+        <div class="search-side-tag">&#127963; Featured Place</div>
+        <div class="search-side-title">Sinhagad Fort</div>
+        <div class="search-side-sub">&#128205; Sinhagad &nbsp;&middot;&nbsp; &#11088; 4.7 &nbsp;&middot;&nbsp; &#127981; &#8377;30 entry</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CATEGORIES -->
+<section class="section cat-section" id="categories">
+  <div class="si">
+    <div class="shd reveal">
+      <div><div class="slbl" style="color:var(--plum)">Browse</div><h2 class="stit">What are you looking for?</h2></div>
+    </div>
+    <div class="cat-grid">
+      <a href="#places" class="cat-card"><span class="cat-em">🏯</span><div class="cat-nm">Tourist Spots</div></a>
+      <a href="#food" class="cat-card"><span class="cat-em">🍛</span><div class="cat-nm">Food &amp; Cafes</div></a>
+      <a href="#gems" class="cat-card"><span class="cat-em">💎</span><div class="cat-nm">Hidden Gems</div></a>
+      <a href="#budget" class="cat-card"><span class="cat-em">🪙</span><div class="cat-nm">Budget Picks</div></a>
+      <a href="#places" class="cat-card"><span class="cat-em">🛡️</span><div class="cat-nm">Forts &amp; History</div></a>
+      <a href="#gems" class="cat-card"><span class="cat-em">🥾</span><div class="cat-nm">Trekking</div></a>
+      <a href="#food" class="cat-card"><span class="cat-em">🌮</span><div class="cat-nm">Street Food</div></a>
+      <a href="#gems" class="cat-card"><span class="cat-em">🌿</span><div class="cat-nm">Nature Spots</div></a>
+    </div>
+  </div>
+</section>
+
+<!-- PLACES -->
+<section class="section places-section" id="places">
+  <div class="si">
+    <div class="shd reveal">
+      <div>
+        <div class="slbl" style="color:var(--saffron)">Explore Places</div>
+        <h2 class="stit">Iconic Attractions</h2>
+        <p class="ssub">Pune's most beloved historical, cultural, and natural landmarks.</p>
+      </div>
+      <a href="#places" class="va" style="color:var(--saffron)">View all →</a>
+    </div>
+    <div class="places-grid" id="placesGrid"></div>
+    <div id="no-results">No places found. Try a different search.</div>
+  </div>
+</section>
+
+<!-- FOOD -->
+<section class="section food-section" id="food">
+  <div class="si">
+    <div class="shd reveal">
+      <div>
+        <div class="slbl">Food &amp; Cafes</div>
+        <h2 class="stit">Pune on a Plate</h2>
+        <p class="ssub">From iconic street food to cozy cafes loved by students and foodies alike.</p>
+      </div>
+    </div>
+    <div class="food-grid" id="foodGrid"></div>
+  </div>
+</section>
+
+<!-- GEMS -->
+<section class="section gems-section" id="gems">
+  <div class="si">
+    <div class="shd reveal">
+      <div>
+        <div class="slbl">Hidden Gems</div>
+        <h2 class="stit">Pune's Best-Kept Secrets</h2>
+        <p class="ssub">Off-the-beaten-path destinations most tourists miss.</p>
+      </div>
+    </div>
+    <div class="gems-grid" id="gemsGrid"></div>
+  </div>
+</section>
+
+<!-- BUDGET -->
+<section class="section budget-section" id="budget">
+  <div class="si">
+    <div class="shd reveal">
+      <div>
+        <div class="slbl" style="color:var(--teal)">Budget Hangouts</div>
+        <h2 class="stit">Great Pune, Less Money</h2>
+        <p class="ssub">Perfect picks for students, backpackers, and budget explorers.</p>
+      </div>
+    </div>
+    <div class="budget-grid" id="budgetGrid"></div>
+  </div>
+</section>
+
+<!-- MAP -->
+<section class="section map-section" id="map">
+  <div class="si">
+    <div class="shd reveal">
+      <div><div class="slbl">Find Your Way</div><h2 class="stit">Pune on the Map</h2></div>
+    </div>
+    <div class="map-wrap">
+      <span style="font-size:60px">🗺️</span>
+      <h3>Interactive Map</h3>
+      <p>Locate all featured places across the city.</p>
+      <div class="map-pins">
+        <div class="map-pin">📍 Shaniwar Wada</div>
+        <div class="map-pin">📍 Aga Khan Palace</div>
+        <div class="map-pin">📍 Sinhagad Fort</div>
+        <div class="map-pin">📍 FC Road</div>
+        <div class="map-pin">📍 Koregaon Park</div>
+        <div class="map-pin">📍 Lohagad Fort</div>
+      </div>
+      <a class="btn btn-sf" href="https://www.google.com/maps/search/Pune+tourist+places" target="_blank" rel="noopener" style="font-size:13px;padding:10px 22px;margin-top:8px">Open in Google Maps</a>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="section contact-section" id="contact">
+  <div class="si">
+    <div class="shd reveal">
+      <div><div class="slbl">Get in Touch</div><h2 class="stit">Share Your Feedback</h2></div>
+    </div>
+    <div class="cg">
+      <div class="ci">
+        <p>Discovered a hidden gem? Know a great budget spot we missed? Help us make Explore Pune even better for students, tourists, and locals.</p>
+        <div class="cpts">
+          <div class="cpt"><div class="cico s">📍</div>Pune, Maharashtra, India</div>
+          <div class="cpt"><div class="cico t">✉️</div>hello@explorepune.in</div>
+          <div class="cpt"><div class="cico p">📸</div>@explorepune on Instagram</div>
+          <div class="cpt"><div class="cico g">🕐</div>We respond within 24 hours</div>
+        </div>
+      </div>
+      <div class="cf">
+        <input class="fi" type="text" id="fName" placeholder="Your name"/>
+        <input class="fi" type="email" id="fEmail" placeholder="Email address"/>
+        <select class="fsel" id="fType"><option value="">Type of feedback</option><option>Suggest a new place</option><option>Report wrong information</option><option>General feedback</option><option>Business listing</option></select>
+        <textarea class="fta" id="fMsg" placeholder="Tell us about it…"></textarea>
+        <button class="fsub" onclick="submitForm()">Send Feedback →</button>
+        <div class="fsok" id="fsok">🎉 Thanks! Your feedback has been received.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPLORE BY AREA -->
+<section class="area-section section" id="areas">
+  <div class="si">
+    <div class="shd reveal">
+      <div>
+        <div class="slbl" style="color:var(--indigo)">Explore by Area</div>
+        <h2 class="stit">Pune's Iconic Neighbourhoods</h2>
+        <p class="ssub">Each area of Pune has its own personality — pick yours and start exploring.</p>
+      </div>
+    </div>
+    <div class="area-grid">
+      <div class="area-card reveal" onclick="quickSearch('fc road');document.getElementById('places').scrollIntoView({behavior:'smooth'})">
+        <img src="https://images.unsplash.com/photo-1511920170033-f8396924c348?w=600&q=80" alt="FC Road" loading="lazy"/>
+        <div class="area-card-overlay"></div>
+        <div class="area-card-count">Cafes + Food</div>
+        <div class="area-card-body">
+          <div class="area-card-name">FC Road</div>
+          <div class="area-card-tag">Student Hub</div>
+        </div>
+      </div>
+      <div class="area-card reveal" onclick="quickSearch('koregaon');document.getElementById('places').scrollIntoView({behavior:'smooth'})">
+        <img src="https://images.unsplash.com/photo-1545389336-cf090694435e?w=600&q=80" alt="Koregaon Park" loading="lazy"/>
+        <div class="area-card-overlay"></div>
+        <div class="area-card-count">Wellness + Cafes</div>
+        <div class="area-card-body">
+          <div class="area-card-name">Koregaon Park</div>
+          <div class="area-card-tag">Upscale + Trendy</div>
+        </div>
+      </div>
+      <div class="area-card reveal" onclick="quickSearch('camp');document.getElementById('places').scrollIntoView({behavior:'smooth'})">
+        <img src="https://images.unsplash.com/photo-1587474260584-136574528ed5?w=600&q=80" alt="Camp" loading="lazy"/>
+        <div class="area-card-overlay"></div>
+        <div class="area-card-count">Heritage + Shopping</div>
+        <div class="area-card-body">
+          <div class="area-card-name">Camp</div>
+          <div class="area-card-tag">Old Pune Charm</div>
+        </div>
+      </div>
+      <div class="area-card reveal" onclick="quickSearch('sinhagad');document.getElementById('places').scrollIntoView({behavior:'smooth'})">
+        <img src="https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?w=600&q=80" alt="Sinhagad" loading="lazy"/>
+        <div class="area-card-overlay"></div>
+        <div class="area-card-count">Forts + Treks</div>
+        <div class="area-card-body">
+          <div class="area-card-name">Sinhagad</div>
+          <div class="area-card-tag">Adventure Zone</div>
+        </div>
+      </div>
+      <div class="area-card reveal" onclick="quickSearch('katraj');document.getElementById('places').scrollIntoView({behavior:'smooth'})">
+        <img src="https://images.unsplash.com/photo-1564349683136-77e08dba1ef7?w=600&q=80" alt="Katraj" loading="lazy"/>
+        <div class="area-card-overlay"></div>
+        <div class="area-card-count">Wildlife + Nature</div>
+        <div class="area-card-body">
+          <div class="area-card-name">Katraj</div>
+          <div class="area-card-tag">Nature Lovers</div>
+        </div>
+      </div>
+      <div class="area-card reveal" onclick="quickSearch('mulshi');document.getElementById('gems').scrollIntoView({behavior:'smooth'})">
+        <img src="https://images.unsplash.com/photo-1501854140801-50d01698950b?w=600&q=80" alt="Mulshi" loading="lazy"/>
+        <div class="area-card-overlay"></div>
+        <div class="area-card-count">Lakes + Scenic</div>
+        <div class="area-card-body">
+          <div class="area-card-name">Mulshi</div>
+          <div class="area-card-tag">Weekend Escape</div>
+        </div>
+      </div>
+      <div class="area-card reveal" onclick="quickSearch('jangli maharaj');document.getElementById('places').scrollIntoView({behavior:'smooth'})">
+        <img src="https://images.unsplash.com/photo-1582632909146-f08a5d1a50b5?w=600&q=80" alt="Deccan" loading="lazy"/>
+        <div class="area-card-overlay"></div>
+        <div class="area-card-count">Temples + Culture</div>
+        <div class="area-card-body">
+          <div class="area-card-name">Deccan</div>
+          <div class="area-card-tag">Cultural Heart</div>
+        </div>
+      </div>
+      <div class="area-card reveal" onclick="quickSearch('nagar road');document.getElementById('places').scrollIntoView({behavior:'smooth'})">
+        <img src="https://images.unsplash.com/photo-1609920658906-8223bd289001?w=600&q=80" alt="Nagar Road" loading="lazy"/>
+        <div class="area-card-overlay"></div>
+        <div class="area-card-count">Monuments + History</div>
+        <div class="area-card-body">
+          <div class="area-card-name">Nagar Road</div>
+          <div class="area-card-tag">Historic Landmarks</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="flogo">Explore Pune</div>
+  <div class="flinks"><a href="#home">Home</a><a href="#places">Places</a><a href="#food">Food</a><a href="#gems">Gems</a><a href="#contact">Contact</a></div>
+  <p>© 2025 Explore My City – Pune. Made with ❤️ for Pune.</p>
+</footer>
+
+<!-- MODAL -->
+<div class="overlay" id="overlay" onclick="maybeClose(event)">
+  <div class="modal">
+    <div class="mtop" id="mTop">
+      <span id="mEmoji">🏯</span>
+      <button class="mclose" onclick="closeModal()">✕</button>
+      <div class="mbdg" id="mBdg">Heritage</div>
+    </div>
+    <div class="mbd">
+      <h2 id="mTitle">Place</h2>
+      <div class="marea" id="mArea">📍 Area, Pune</div>
+      <p id="mDesc">Description.</p>
+      <div class="mmeta">
+        <div class="mm"><div class="lbl">Best Time</div><div class="val" id="mTime">Oct – Feb</div></div>
+        <div class="mm"><div class="lbl">Entry Fee</div><div class="val" id="mFee">₹ 25</div></div>
+        <div class="mm"><div class="lbl">Rating</div><div class="val" id="mRating">⭐ 4.5</div></div>
+        <div class="mm"><div class="lbl">Category</div><div class="val" id="mCat">Heritage</div></div>
+      </div>
+      <div class="macts">
+        <a id="mLink" class="btn btn-sf" href="#" target="_blank" style="font-size:13px;padding:10px 20px">View on Maps 📍</a>
+        <button class="btn btn-ol" onclick="closeModal()" style="font-size:13px;padding:10px 20px">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const places=[
+  {id:1,name:'Shaniwar Wada',area:'Shaniwar Peth',emoji:'🏯',badge:'Heritage',rating:'4.6',desc:'A magnificent 18th-century fortification and seat of the Peshwa rulers of the Maratha Empire. Famous for its grand entrance gates and the tragic tale of Vishwasrao.',tags:['History','Architecture','Peshwa Era'],time:'Oct – Mar',fee:'₹ 25',cat:'Heritage Fort',cat2:'tourist fort history historical heritage maratha peshwa shaniwar peth',maps:'https://maps.google.com/?q=Shaniwar+Wada+Pune',img:'https://images.unsplash.com/photo-1587474260584-136574528ed5?w=600',timings:'8:00 AM – 6:30 PM',history:'Built in 1732 by Bajirao I, Shaniwar Wada served as the seat of the Peshwas of the Maratha Empire. The fort was destroyed by a fire in 1828, but its impressive walls and gates remain.'},
+  {id:2,name:'Aga Khan Palace',area:'Nagar Road',emoji:'🕌',badge:'Historic',rating:'4.5',desc:'A beautiful Indo-Saracenic palace where Mahatma Gandhi and Kasturba Gandhi were imprisoned during the Quit India Movement. Now a national monument with serene gardens.',tags:['Gandhi','Monument','Museum'],time:'All Year',fee:'₹ 25',cat:'National Monument',cat2:'tourist history historical monument gandhi museum nagar road',maps:'https://maps.google.com/?q=Aga+Khan+Palace+Pune',img:'https://images.unsplash.com/photo-1609920658906-8223bd289001?w=600',timings:'9:00 AM – 5:30 PM',history:'Built in 1892 by Sultan Muhammed Shah Aga Khan III, this palace became a prison for Mahatma Gandhi, his wife Kasturba, and secretary Mahadev Desai during the Quit India Movement in 1942.'},
+  {id:3,name:'Sinhagad Fort',area:'Sinhagad',emoji:'🏔️',badge:'Trekking',rating:'4.7',desc:'A historic fort at 1312m above sea level offering breathtaking views of the Sahyadri ranges. The site of the legendary battle of Tanaji Malusare.',tags:['Trek','Views','Maratha'],time:'Oct – Feb',fee:'₹ 30',cat:'Hill Fort',cat2:'tourist fort trek trekking nature history maratha sahyadri sinhagad',maps:'https://maps.google.com/?q=Sinhagad+Fort+Pune',img:'https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?w=600',timings:'6:00 AM – 6:00 PM',history:'Originally called Kondana, Sinhagad was the site of the famous Battle of Sinhagad in 1670 where Tanaji Malusare recaptured the fort from the Mughals. The fort offers stunning panoramic views.'},
+  {id:4,name:'Osho Ashram',area:'Koregaon Park',emoji:'🧘',badge:'Wellness',rating:'4.3',desc:'The world-renowned Osho International Meditation Resort — a tranquil oasis offering meditation, beautiful gardens, and a unique spiritual experience.',tags:['Meditation','Spiritual','Garden'],time:'All Year',fee:'₹ 650',cat:'Wellness Retreat',cat2:'tourist wellness meditation spiritual koregaon park garden',maps:'https://maps.google.com/?q=Osho+Ashram+Pune',img:'https://images.unsplash.com/photo-1545389336-cf090694435e?w=600',timings:'6:00 AM – 9:00 PM',history:'Founded by spiritual teacher Osho (Rajneesh) in 1974, this meditation resort attracts thousands of visitors worldwide seeking meditation, therapy, and spiritual growth in a serene environment.'},
+  {id:5,name:'Pataleshwar Caves',area:'Jangli Maharaj Rd',emoji:'⛩️',badge:'Ancient',rating:'4.2',desc:'Rock-cut cave temple dedicated to Lord Shiva, dating back to the 8th century Rashtrakuta period. One of the oldest temples in Pune, still actively worshipped.',tags:['Temple','Ancient','Caves'],time:'All Year',fee:'Free',cat:'Ancient Temple',cat2:'tourist history caves ancient temple shiva jangli maharaj',maps:'https://maps.google.com/?q=Pataleshwar+Cave+Temple+Pune',img:'https://images.unsplash.com/photo-1582632909146-f08a5d1a50b5?w=600',timings:'5:00 AM – 9:00 PM',history:'Carved in the 8th century during the Rashtrakuta dynasty, this rock-cut cave temple is dedicated to Lord Shiva. The circular Nandi mandapa and the main shrine showcase ancient Indian architecture.'},
+  {id:6,name:'Rajiv Gandhi Zoo',area:'Katraj',emoji:'🦁',badge:'Wildlife',rating:'4.4',desc:'Katraj Zoo is home to tigers, leopards, elephants, crocodiles, and hundreds of bird species. A great family destination with a dedicated snake park.',tags:['Wildlife','Family','Nature'],time:'All Year',fee:'₹ 50',cat:'Zoological Park',cat2:'tourist family nature wildlife zoo katraj animals',maps:'https://maps.google.com/?q=Rajiv+Gandhi+Zoological+Park+Pune',img:'https://images.unsplash.com/photo-1564349683136-77e08dba1ef7?w=600',timings:'9:30 AM – 5:00 PM (Closed Wed)',history:'Established in 1999, this 130-acre zoo houses over 1600 animals including rare species. The zoo focuses on conservation, education, and providing natural habitats for wildlife.'},
+];
+const foods=[
+  {emoji:'🥘',name:'Misal Pav',place:'Bedekar Tea Stall & others',desc:"Pune's most iconic breakfast — spicy sprouted curry topped with farsan, served with bread.",price:'₹ 40–80',img:'https://images.unsplash.com/photo-1601050690597-df0568f70950?w=400'},
+  {emoji:'🍵',name:'Cutting Chai & Bun Maska',place:'Vaishali, FC Road',desc:'The ultimate FC Road experience — a classic Irani cafe ritual loved by students since the 1960s.',price:'₹ 30–60',img:'https://images.unsplash.com/photo-1571934811356-5cc061b6821f?w=400'},
+  {emoji:'🧆',name:'Batata Vada',place:'Vada Pav corners citywide',desc:"A spiced potato dumpling in crispy gram flour batter — Pune's beloved street snack.",price:'₹ 15–30',img:'https://images.unsplash.com/photo-1606491956689-2ea866880c84?w=400'},
+  {emoji:'☕',name:'Third-Wave Coffee',place:'Koregaon Park cafes',desc:"Specialty pour-overs, cold brews, and single-origin roasts from Pune's thriving independent cafe scene.",price:'₹ 150–350',img:'https://images.unsplash.com/photo-1511920170033-f8396924c348?w=400'},
+  {emoji:'🍡',name:'Mastani',place:'Sujata Mastani & others',desc:"Pune's original thick milkshake topped with a full ice cream scoop — a beloved local dessert.",price:'₹ 100–200',img:'https://images.unsplash.com/photo-1579954115545-a95591f28bfc?w=400'},
+  {emoji:'🫕',name:'Kolhapuri Mutton',place:'Dhabas & local restaurants',desc:'Fiery, aromatic Kolhapuri-style mutton curry — best enjoyed with traditional bhakri bread.',price:'₹ 200–400',img:'https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=400'},
+  {emoji:'🧇',name:'Sabudana Khichdi',place:'Aaswad & snack shops',desc:'Light tapioca pearl stir-fry with peanuts and green chillies — a traditional Pune favourite.',price:'₹ 60–120',img:'https://images.unsplash.com/photo-1589301760014-d929f3979dbc?w=400'},
+  {emoji:'🍦',name:'Amul Ice Cream',place:'Near colleges & gardens',desc:"Classic affordable ice cream in hundreds of flavours — a staple for every Punekar's evening.",price:'₹ 20–80',img:'https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=400'},
+];
+const gems=[
+  {emoji:'🌊',name:'Malhargad Fort',badge:'Hidden Fort',desc:'A lesser-visited 18th-century fort with fewer crowds and panoramic views of the Purandar plateau.',img:'https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?w=600'},
+  {emoji:'🌳',name:'Vetal Tekdi Hill',badge:'Nature Walk',desc:"Pune's forested hilltop — perfect for morning walks, birdwatching, and quiet city escapes.",img:'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=600'},
+  {emoji:'💧',name:'Bhimashankar Trail',badge:'Waterfalls + Trek',desc:'Dense Sahyadri forest leading to one of the 12 Jyotirlinga shrines and stunning seasonal waterfalls.',img:'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600'},
+  {emoji:'🏺',name:'Parvati Hill & Museum',badge:'Panoramic Views',desc:'A hilltop temple complex with a rich Peshwa museum and the best sunset views over old Pune.',img:'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=600'},
+  {emoji:'📸',name:'Mulshi Lake',badge:'Photography',desc:'A serene reservoir surrounded by rolling Sahyadri hills — perfect for photography and road trips.',img:'https://images.unsplash.com/photo-1501854140801-50d01698950b?w=600'},
+];
+const budget=[
+  {emoji:'🌳',name:'Empress Botanical Garden',desc:'Lush botanical gardens — perfect for a peaceful picnic or evening walk',range:'Free Entry'},
+  {emoji:'📚',name:'Balgandharva Book Fair',desc:"Pune's famous book fairs with thousands of titles at massive discounts",range:'₹ 0–500 spend'},
+  {emoji:'🎬',name:'FTII Campus Walk',desc:'Explore the legendary Film and Television Institute campus — open to visitors',range:'Free'},
+  {emoji:'🏖️',name:'Khadakwasla Dam',desc:'Popular lakeside spot for groups — stunning sunset views and budget snack stalls nearby',range:'Free'},
+  {emoji:'🛒',name:'Tulsi Baug Market',desc:"Old Pune's bustling bazaar for clothes, accessories, and traditional items at low prices",range:'₹ 50–500'},
+  {emoji:'🍜',name:'FC Road Dhabas',desc:'Student-friendly eateries serving hearty Maharashtrian meals at affordable prices',range:'₹ 60–150 meal'},
+  {emoji:'🎭',name:'Bal Gandharva Rang Mandir',desc:'Affordable cultural events, plays, and classical music performances year-round',range:'₹ 100–300'},
+  {emoji:'🚵',name:'Lonavala Day Trip',desc:'Nearby hill station accessible by train — chikki, viewpoints, and waterfalls await',range:'₹ 150–300'},
+];
+
+const gradients=['linear-gradient(135deg,#FEF0E7,#F5C842 80%)','linear-gradient(135deg,#DFF5F1,#0A7B6C 80%)','linear-gradient(135deg,#F0EAF9,#6B3FA0 80%)','linear-gradient(135deg,#DFF5F1,#065548 80%)','linear-gradient(135deg,#FCEAF1,#C42B5A 80%)','linear-gradient(135deg,#EAF0FC,#2D4EAA 80%)'];
+
+function renderPlaces(list){
+  const g=document.getElementById('placesGrid'),nr=document.getElementById('no-results');
+  if(!list.length){g.innerHTML='';nr.style.display='block';return}
+  nr.style.display='none';
+  g.innerHTML=list.map((p,i)=>`
+    <div class="pc reveal">
+      <div class="pt"><img src="${p.img}" alt="${p.name}" loading="lazy"/><div class="pt-overlay"></div><span>${p.emoji}</span><div class="tb">${p.badge}</div><div class="tr">⭐ ${p.rating}</div></div>
+      <div class="pb"><h3>${p.name}</h3><div class="pa">📍 ${p.area}, Pune</div><p class="pd">${p.desc.substring(0,100)}…</p>
+      <div class="ptags"><span class="ptag ptag-s">${p.tags[0]}</span><span class="ptag ptag-t">${p.tags[1]}</span>${p.tags[2]?`<span class="ptag ptag-p">${p.tags[2]}</span>`:''}</div>
+      <button class="view-details-btn" onclick="openModal(${p.id})">View Details →</button></div>
+    </div>`).join('');
+  observeReveal();
+}
+function renderFoods(){
+  document.getElementById('foodGrid').innerHTML=foods.map(f=>`
+    <div class="fc reveal"><div class="fem"><img src="${f.img}" alt="${f.name}" loading="lazy"/><div class="fem-overlay"></div><span>${f.emoji}</span></div>
+    <div class="fbd"><h3>${f.name}</h3><div class="fhint">${f.place}</div><div class="fdsc">${f.desc}</div><span class="fpr">${f.price}</span></div></div>`).join('');
+}
+function renderGems(){
+  const [first,...rest]=gems;
+  document.getElementById('gemsGrid').innerHTML=
+    `<div class="gc"><img src="${first.img}" alt="${first.name}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0"/><div class="ggrad"></div><div class="gbody"><div class="gpill">${first.badge}</div><h3>${first.name}</h3><p>${first.desc}</p></div></div>`+
+    rest.map(g=>`<div class="gc" style="min-height:190px"><img src="${g.img}" alt="${g.name}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0"/><div class="ggrad"></div><div class="gbody"><div class="gpill">${g.badge}</div><h3 style="font-size:18px">${g.name}</h3><p>${g.desc.substring(0,65)}…</p></div></div>`).join('');
+}
+function renderBudget(){
+  document.getElementById('budgetGrid').innerHTML=budget.map(b=>`
+    <div class="bc reveal"><div class="bem">${b.emoji}</div><h3>${b.name}</h3><p>${b.desc}</p><div class="br">${b.range}</div></div>`).join('');
+}
+
+function openModal(id){
+  const p=places.find(x=>x.id===id);if(!p)return;
+  const i=p.id-1;
+  const mTop=document.getElementById('mTop');
+  mTop.style.backgroundImage=`url(${p.img})`;
+  mTop.innerHTML=`<img src="${p.img}" alt="${p.name}"/><div class="mtop-overlay"></div><span id="mEmoji">${p.emoji}</span><button class="mclose" onclick="closeModal()">✕</button><div class="mbdg" id="mBdg">${p.badge}</div>`;
+  document.getElementById('mBdg').style.color=i%2===0?'var(--saffron)':'var(--teal)';
+  document.getElementById('mTitle').textContent=p.name;
+  document.getElementById('mArea').textContent='📍 '+p.area+', Pune';
+  document.getElementById('mDesc').textContent=p.desc;
+  document.getElementById('mTime').textContent=p.time;
+  document.getElementById('mFee').textContent=p.fee;
+  document.getElementById('mRating').textContent='⭐ '+p.rating;
+  document.getElementById('mCat').textContent=p.cat;
+  document.getElementById('mLink').href=p.maps;
+  const historyHtml=p.history?`<div class="mhistory"><div class="lbl">History & Background</div><div class="txt">${p.history}</div></div>`:'';
+  const timingsHtml=p.timings?`<div class="mm"><div class="lbl">Timings</div><div class="val">${p.timings}</div></div>`:'';
+  document.querySelector('.mmeta').innerHTML=`
+    ${timingsHtml}
+    <div class="mm"><div class="lbl">Best Time</div><div class="val" id="mTime">${p.time}</div></div>
+    <div class="mm"><div class="lbl">Entry Fee</div><div class="val" id="mFee">${p.fee}</div></div>
+    <div class="mm"><div class="lbl">Rating</div><div class="val" id="mRating">⭐ ${p.rating}</div></div>
+  `;
+  document.querySelector('.mhistory')?.remove();
+  document.querySelector('.mmeta').insertAdjacentHTML('afterend',historyHtml);
+  document.getElementById('overlay').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeModal(){document.getElementById('overlay').classList.remove('open');document.body.style.overflow='';}
+function maybeClose(e){if(e.target===document.getElementById('overlay'))closeModal();}
+
+let activeFilter='';
+
+function applyFilters(){
+  const q=document.getElementById('searchInput').value.toLowerCase().trim();
+  const cat=document.getElementById('filterCat').value.toLowerCase();
+  const info=document.getElementById('searchResultsInfo');
+  let list=places;
+  if(q) list=list.filter(p=>
+    p.name.toLowerCase().includes(q)||
+    p.desc.toLowerCase().includes(q)||
+    p.tags.join(' ').toLowerCase().includes(q)||
+    p.area.toLowerCase().includes(q)||
+    p.badge.toLowerCase().includes(q)||
+    p.cat2.toLowerCase().includes(q)
+  );
+  if(cat) list=list.filter(p=>p.cat2.toLowerCase().includes(cat));
+  if(activeFilter==='free') list=list.filter(p=>p.fee.toLowerCase()==='free');
+  else if(activeFilter) list=list.filter(p=>p.cat2.toLowerCase().includes(activeFilter));
+  renderPlaces(list);
+  const term=q||cat||activeFilter;
+  if(term){
+    info.style.display='block';
+    info.innerHTML=list.length
+      ?`🔍 Found <strong>${list.length}</strong> place${list.length>1?'s':''} &nbsp;<span style="cursor:pointer;color:var(--saffron)" onclick="clearAll()">Clear ×</span>`
+      :`No results found &nbsp;<span style="cursor:pointer;color:var(--saffron)" onclick="clearAll()">Clear ×</span>`;
+  } else { info.style.display='none'; }
+  if(term) document.getElementById('places').scrollIntoView({behavior:'smooth',block:'start'});
+}
+function runSearch(){ applyFilters(); }
+function liveSearch(){
+  const q=document.getElementById('searchInput').value.toLowerCase().trim();
+  if(q.length===0&&!activeFilter){renderPlaces(places);document.getElementById('searchResultsInfo').style.display='none';return;}
+  if(q.length>=2||activeFilter) applyFilters();
+}
+function quickSearch(t){
+  document.getElementById('searchInput').value=t;
+  document.getElementById('filterCat').value='';
+  applyFilters();
+}
+function clearAll(){
+  document.getElementById('searchInput').value='';
+  document.getElementById('filterCat').value='';
+  document.getElementById('searchResultsInfo').style.display='none';
+  activeFilter='';
+  document.querySelectorAll('.fbtn').forEach(b=>b.classList.remove('active'));
+  document.querySelector('.fbtn[data-filter=""]').classList.add('active');
+  renderPlaces(places);
+}
+
+document.querySelectorAll('.fbtn').forEach(btn=>{
+  btn.addEventListener('click',function(){
+    document.querySelectorAll('.fbtn').forEach(b=>b.classList.remove('active'));
+    this.classList.add('active');
+    activeFilter=this.dataset.filter;
+    applyFilters();
+  });
+});
+
+document.getElementById('searchInput').addEventListener('keydown',e=>{if(e.key==='Enter')applyFilters();});
+
+function submitForm(){
+  const n=document.getElementById('fName').value.trim(),e=document.getElementById('fEmail').value.trim(),m=document.getElementById('fMsg').value.trim();
+  if(!n||!e||!m){alert('Please fill in name, email and message.');return;}
+  document.getElementById('fsok').style.display='block';
+  ['fName','fEmail','fMsg'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('fType').value='';
+}
+
+function observeReveal(){
+  const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('vis');obs.unobserve(e.target);}});},{threshold:0.1});
+  document.querySelectorAll('.reveal:not(.vis)').forEach(el=>obs.observe(el));
+}
+
+function toggleTheme(){
+  const html=document.documentElement;
+  const newTheme=html.getAttribute('data-theme')==='dark'?'light':'dark';
+  html.setAttribute('data-theme',newTheme);
+  localStorage.setItem('theme',newTheme);
+  document.querySelector('.theme-toggle').textContent=newTheme==='dark'?'☀️':'🌙';
+}
+function initTheme(){
+  const saved=localStorage.getItem('theme')||'light';
+  document.documentElement.setAttribute('data-theme',saved);
+  document.querySelector('.theme-toggle').textContent=saved==='dark'?'☀️':'🌙';
+}
+
+renderPlaces(places);renderFoods();renderGems();renderBudget();observeReveal();initTheme();
+</script>
+</body>
+</html>
