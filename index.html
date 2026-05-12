@@ -141,7 +141,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:var(--nav-h);backgrou
 .pt{height:200px;display:flex;align-items:center;justify-content:center;font-size:74px;position:relative;background-size:cover;background-position:center;overflow:hidden}
 .pt img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
 .pt-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,0.1),rgba(0,0,0,0.3));z-index:1}
-.pt span{position:relative;z-index:2;text-shadow:0 2px 8px rgba(0,0,0,0.3)}
 .tb{position:absolute;top:14px;left:14px;background:rgba(255,255,255,.92);border-radius:100px;padding:4px 12px;font-size:10px;font-weight:700;color:var(--dark);letter-spacing:.5px;text-transform:uppercase}
 .tr{position:absolute;top:14px;right:14px;background:rgba(0,0,0,.55);border-radius:100px;padding:4px 10px;font-size:12px;font-weight:600;color:#fff}
 .pb{padding:20px}
@@ -177,7 +176,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:var(--nav-h);backgrou
 .fem{height:120px;display:flex;align-items:center;justify-content:center;font-size:58px;position:relative;background-size:cover;background-position:center;overflow:hidden}
 .fem img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
 .fem-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,0.2),rgba(0,0,0,0.5));z-index:1}
-.fem span{position:relative;z-index:2;text-shadow:0 2px 8px rgba(0,0,0,0.4)}
 .fbd{padding:16px}
 .fbd h3{font-size:15px;font-weight:600;color:#fff;margin-bottom:4px}
 .fbd .fhint{font-size:11px;color:rgba(255,255,255,.4);margin-bottom:8px}
@@ -225,7 +223,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:var(--nav-h);backgrou
 .bc:nth-child(6){background:var(--saffron-light);border-color:rgba(232,82,10,.15)}.bc:nth-child(6) .br{color:var(--saffron)}
 .bc:nth-child(7){background:var(--plum-light);border-color:rgba(107,63,160,.15)}.bc:nth-child(7) .br{color:var(--plum)}
 .bc:nth-child(8){background:var(--forest-light);border-color:rgba(45,106,63,.15)}.bc:nth-child(8) .br{color:var(--forest)}
-.bem{font-size:28px;margin-bottom:12px}
 .bc h3{font-size:14px;font-weight:700;color:var(--dark);margin-bottom:5px;transition:color .3s}
 .bc p{font-size:12px;color:var(--muted);line-height:1.6;margin-bottom:12px;transition:color .3s}
 .br{font-size:12px;font-weight:700}
@@ -809,39 +806,39 @@ footer p{font-size:12px;color:rgba(255,255,255,.25)}
 
 <script>
 const places=[
-  {id:1,name:'Shaniwar Wada',area:'Shaniwar Peth',emoji:'🏯',badge:'Heritage',rating:'4.6',desc:'A magnificent 18th-century fortification and seat of the Peshwa rulers of the Maratha Empire. Famous for its grand entrance gates and the tragic tale of Vishwasrao.',tags:['History','Architecture','Peshwa Era'],time:'Oct – Mar',fee:'₹ 25',cat:'Heritage Fort',cat2:'tourist fort history historical heritage maratha peshwa shaniwar peth',maps:'https://maps.google.com/?q=Shaniwar+Wada+Pune',img:'https://images.unsplash.com/photo-1587474260584-136574528ed5?w=600',timings:'8:00 AM – 6:30 PM',history:'Built in 1732 by Bajirao I, Shaniwar Wada served as the seat of the Peshwas of the Maratha Empire. The fort was destroyed by a fire in 1828, but its impressive walls and gates remain.'},
-  {id:2,name:'Aga Khan Palace',area:'Nagar Road',emoji:'🕌',badge:'Historic',rating:'4.5',desc:'A beautiful Indo-Saracenic palace where Mahatma Gandhi and Kasturba Gandhi were imprisoned during the Quit India Movement. Now a national monument with serene gardens.',tags:['Gandhi','Monument','Museum'],time:'All Year',fee:'₹ 25',cat:'National Monument',cat2:'tourist history historical monument gandhi museum nagar road',maps:'https://maps.google.com/?q=Aga+Khan+Palace+Pune',img:'https://images.unsplash.com/photo-1609920658906-8223bd289001?w=600',timings:'9:00 AM – 5:30 PM',history:'Built in 1892 by Sultan Muhammed Shah Aga Khan III, this palace became a prison for Mahatma Gandhi, his wife Kasturba, and secretary Mahadev Desai during the Quit India Movement in 1942.'},
-  {id:3,name:'Sinhagad Fort',area:'Sinhagad',emoji:'🏔️',badge:'Trekking',rating:'4.7',desc:'A historic fort at 1312m above sea level offering breathtaking views of the Sahyadri ranges. The site of the legendary battle of Tanaji Malusare.',tags:['Trek','Views','Maratha'],time:'Oct – Feb',fee:'₹ 30',cat:'Hill Fort',cat2:'tourist fort trek trekking nature history maratha sahyadri sinhagad',maps:'https://maps.google.com/?q=Sinhagad+Fort+Pune',img:'https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?w=600',timings:'6:00 AM – 6:00 PM',history:'Originally called Kondana, Sinhagad was the site of the famous Battle of Sinhagad in 1670 where Tanaji Malusare recaptured the fort from the Mughals. The fort offers stunning panoramic views.'},
-  {id:4,name:'Osho Ashram',area:'Koregaon Park',emoji:'🧘',badge:'Wellness',rating:'4.3',desc:'The world-renowned Osho International Meditation Resort — a tranquil oasis offering meditation, beautiful gardens, and a unique spiritual experience.',tags:['Meditation','Spiritual','Garden'],time:'All Year',fee:'₹ 650',cat:'Wellness Retreat',cat2:'tourist wellness meditation spiritual koregaon park garden',maps:'https://maps.google.com/?q=Osho+Ashram+Pune',img:'https://images.unsplash.com/photo-1545389336-cf090694435e?w=600',timings:'6:00 AM – 9:00 PM',history:'Founded by spiritual teacher Osho (Rajneesh) in 1974, this meditation resort attracts thousands of visitors worldwide seeking meditation, therapy, and spiritual growth in a serene environment.'},
-  {id:5,name:'Pataleshwar Caves',area:'Jangli Maharaj Rd',emoji:'⛩️',badge:'Ancient',rating:'4.2',desc:'Rock-cut cave temple dedicated to Lord Shiva, dating back to the 8th century Rashtrakuta period. One of the oldest temples in Pune, still actively worshipped.',tags:['Temple','Ancient','Caves'],time:'All Year',fee:'Free',cat:'Ancient Temple',cat2:'tourist history caves ancient temple shiva jangli maharaj',maps:'https://maps.google.com/?q=Pataleshwar+Cave+Temple+Pune',img:'https://images.unsplash.com/photo-1582632909146-f08a5d1a50b5?w=600',timings:'5:00 AM – 9:00 PM',history:'Carved in the 8th century during the Rashtrakuta dynasty, this rock-cut cave temple is dedicated to Lord Shiva. The circular Nandi mandapa and the main shrine showcase ancient Indian architecture.'},
-  {id:6,name:'Rajiv Gandhi Zoo',area:'Katraj',emoji:'🦁',badge:'Wildlife',rating:'4.4',desc:'Katraj Zoo is home to tigers, leopards, elephants, crocodiles, and hundreds of bird species. A great family destination with a dedicated snake park.',tags:['Wildlife','Family','Nature'],time:'All Year',fee:'₹ 50',cat:'Zoological Park',cat2:'tourist family nature wildlife zoo katraj animals',maps:'https://maps.google.com/?q=Rajiv+Gandhi+Zoological+Park+Pune',img:'https://images.unsplash.com/photo-1564349683136-77e08dba1ef7?w=600',timings:'9:30 AM – 5:00 PM (Closed Wed)',history:'Established in 1999, this 130-acre zoo houses over 1600 animals including rare species. The zoo focuses on conservation, education, and providing natural habitats for wildlife.'},
+  {id:1,name:'Shaniwar Wada',area:'Shaniwar Peth',badge:'Heritage',rating:'4.6',desc:'A magnificent 18th-century fortification and seat of the Peshwa rulers of the Maratha Empire. Famous for its grand entrance gates and the tragic tale of Vishwasrao.',tags:['History','Architecture','Peshwa Era'],time:'Oct – Mar',fee:'₹ 25',cat:'Heritage Fort',cat2:'tourist fort history historical heritage maratha peshwa shaniwar peth',maps:'https://maps.google.com/?q=Shaniwar+Wada+Pune',img:'https://images.unsplash.com/photo-1587474260584-136574528ed5?w=600',timings:'8:00 AM – 6:30 PM',history:'Built in 1732 by Bajirao I, Shaniwar Wada served as the seat of the Peshwas of the Maratha Empire. The fort was destroyed by a fire in 1828, but its impressive walls and gates remain.'},
+  {id:2,name:'Aga Khan Palace',area:'Nagar Road',badge:'Historic',rating:'4.5',desc:'A beautiful Indo-Saracenic palace where Mahatma Gandhi and Kasturba Gandhi were imprisoned during the Quit India Movement. Now a national monument with serene gardens.',tags:['Gandhi','Monument','Museum'],time:'All Year',fee:'₹ 25',cat:'National Monument',cat2:'tourist history historical monument gandhi museum nagar road',maps:'https://maps.google.com/?q=Aga+Khan+Palace+Pune',img:'https://images.unsplash.com/photo-1609920658906-8223bd289001?w=600',timings:'9:00 AM – 5:30 PM',history:'Built in 1892 by Sultan Muhammed Shah Aga Khan III, this palace became a prison for Mahatma Gandhi, his wife Kasturba, and secretary Mahadev Desai during the Quit India Movement in 1942.'},
+  {id:3,name:'Sinhagad Fort',area:'Sinhagad',badge:'Trekking',rating:'4.7',desc:'A historic fort at 1312m above sea level offering breathtaking views of the Sahyadri ranges. The site of the legendary battle of Tanaji Malusare.',tags:['Trek','Views','Maratha'],time:'Oct – Feb',fee:'₹ 30',cat:'Hill Fort',cat2:'tourist fort trek trekking nature history maratha sahyadri sinhagad',maps:'https://maps.google.com/?q=Sinhagad+Fort+Pune',img:'https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?w=600',timings:'6:00 AM – 6:00 PM',history:'Originally called Kondana, Sinhagad was the site of the famous Battle of Sinhagad in 1670 where Tanaji Malusare recaptured the fort from the Mughals. The fort offers stunning panoramic views.'},
+  {id:4,name:'Osho Ashram',area:'Koregaon Park',badge:'Wellness',rating:'4.3',desc:'The world-renowned Osho International Meditation Resort — a tranquil oasis offering meditation, beautiful gardens, and a unique spiritual experience.',tags:['Meditation','Spiritual','Garden'],time:'All Year',fee:'₹ 650',cat:'Wellness Retreat',cat2:'tourist wellness meditation spiritual koregaon park garden',maps:'https://maps.google.com/?q=Osho+Ashram+Pune',img:'https://images.unsplash.com/photo-1545389336-cf090694435e?w=600',timings:'6:00 AM – 9:00 PM',history:'Founded by spiritual teacher Osho (Rajneesh) in 1974, this meditation resort attracts thousands of visitors worldwide seeking meditation, therapy, and spiritual growth in a serene environment.'},
+  {id:5,name:'Pataleshwar Caves',area:'Jangli Maharaj Rd',badge:'Ancient',rating:'4.2',desc:'Rock-cut cave temple dedicated to Lord Shiva, dating back to the 8th century Rashtrakuta period. One of the oldest temples in Pune, still actively worshipped.',tags:['Temple','Ancient','Caves'],time:'All Year',fee:'Free',cat:'Ancient Temple',cat2:'tourist history caves ancient temple shiva jangli maharaj',maps:'https://maps.google.com/?q=Pataleshwar+Cave+Temple+Pune',img:'https://images.unsplash.com/photo-1544735716-392fe2489ffa?w=600',timings:'5:00 AM – 9:00 PM',history:'Carved in the 8th century during the Rashtrakuta dynasty, this rock-cut cave temple is dedicated to Lord Shiva. The circular Nandi mandapa and the main shrine showcase ancient Indian architecture.'},
+  {id:6,name:'Rajiv Gandhi Zoo',area:'Katraj',badge:'Wildlife',rating:'4.4',desc:'Katraj Zoo is home to tigers, leopards, elephants, crocodiles, and hundreds of bird species. A great family destination with a dedicated snake park.',tags:['Wildlife','Family','Nature'],time:'All Year',fee:'₹ 50',cat:'Zoological Park',cat2:'tourist family nature wildlife zoo katraj animals',maps:'https://maps.google.com/?q=Rajiv+Gandhi+Zoological+Park+Pune',img:'https://images.unsplash.com/photo-1564349683136-77e08dba1ef7?w=600',timings:'9:30 AM – 5:00 PM (Closed Wed)',history:'Established in 1999, this 130-acre zoo houses over 1600 animals including rare species. The zoo focuses on conservation, education, and providing natural habitats for wildlife.'},
 ];
 const foods=[
-  {emoji:'🥘',name:'Misal Pav',place:'Bedekar Tea Stall & others',desc:"Pune's most iconic breakfast — spicy sprouted curry topped with farsan, served with bread.",price:'₹ 40–80',img:'https://images.unsplash.com/photo-1601050690597-df0568f70950?w=400'},
-  {emoji:'🍵',name:'Cutting Chai & Bun Maska',place:'Vaishali, FC Road',desc:'The ultimate FC Road experience — a classic Irani cafe ritual loved by students since the 1960s.',price:'₹ 30–60',img:'https://images.unsplash.com/photo-1571934811356-5cc061b6821f?w=400'},
-  {emoji:'🧆',name:'Batata Vada',place:'Vada Pav corners citywide',desc:"A spiced potato dumpling in crispy gram flour batter — Pune's beloved street snack.",price:'₹ 15–30',img:'https://images.unsplash.com/photo-1606491956689-2ea866880c84?w=400'},
-  {emoji:'☕',name:'Third-Wave Coffee',place:'Koregaon Park cafes',desc:"Specialty pour-overs, cold brews, and single-origin roasts from Pune's thriving independent cafe scene.",price:'₹ 150–350',img:'https://images.unsplash.com/photo-1511920170033-f8396924c348?w=400'},
-  {emoji:'🍡',name:'Mastani',place:'Sujata Mastani & others',desc:"Pune's original thick milkshake topped with a full ice cream scoop — a beloved local dessert.",price:'₹ 100–200',img:'https://images.unsplash.com/photo-1579954115545-a95591f28bfc?w=400'},
-  {emoji:'🫕',name:'Kolhapuri Mutton',place:'Dhabas & local restaurants',desc:'Fiery, aromatic Kolhapuri-style mutton curry — best enjoyed with traditional bhakri bread.',price:'₹ 200–400',img:'https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=400'},
-  {emoji:'🧇',name:'Sabudana Khichdi',place:'Aaswad & snack shops',desc:'Light tapioca pearl stir-fry with peanuts and green chillies — a traditional Pune favourite.',price:'₹ 60–120',img:'https://images.unsplash.com/photo-1589301760014-d929f3979dbc?w=400'},
-  {emoji:'🍦',name:'Amul Ice Cream',place:'Near colleges & gardens',desc:"Classic affordable ice cream in hundreds of flavours — a staple for every Punekar's evening.",price:'₹ 20–80',img:'https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=400'},
+  {name:'Misal Pav',place:'Bedekar Tea Stall & others',desc:"Pune's most iconic breakfast — spicy sprouted curry topped with farsan, served with bread.",price:'₹ 40–80',img:'https://images.unsplash.com/photo-1601050690597-df0568f70950?w=400'},
+  {name:'Cutting Chai & Bun Maska',place:'Vaishali, FC Road',desc:'The ultimate FC Road experience — a classic Irani cafe ritual loved by students since the 1960s.',price:'₹ 30–60',img:'https://images.unsplash.com/photo-1571934811356-5cc061b6821f?w=400'},
+  {name:'Batata Vada',place:'Vada Pav corners citywide',desc:"A spiced potato dumpling in crispy gram flour batter — Pune's beloved street snack.",price:'₹ 15–30',img:'https://images.unsplash.com/photo-1606491956689-2ea866880c84?w=400'},
+  {name:'Third-Wave Coffee',place:'Koregaon Park cafes',desc:"Specialty pour-overs, cold brews, and single-origin roasts from Pune's thriving independent cafe scene.",price:'₹ 150–350',img:'https://images.unsplash.com/photo-1511920170033-f8396924c348?w=400'},
+  {name:'Mastani',place:'Sujata Mastani & others',desc:"Pune's original thick milkshake topped with a full ice cream scoop — a beloved local dessert.",price:'₹ 100–200',img:'https://images.unsplash.com/photo-1579954115545-a95591f28bfc?w=400'},
+  {name:'Kolhapuri Mutton',place:'Dhabas & local restaurants',desc:'Fiery, aromatic Kolhapuri-style mutton curry — best enjoyed with traditional bhakri bread.',price:'₹ 200–400',img:'https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=400'},
+  {name:'Sabudana Khichdi',place:'Aaswad & snack shops',desc:'Light tapioca pearl stir-fry with peanuts and green chillies — a traditional Pune favourite.',price:'₹ 60–120',img:'https://images.unsplash.com/photo-1589301760014-d929f3979dbc?w=400'},
+  {name:'Amul Ice Cream',place:'Near colleges & gardens',desc:"Classic affordable ice cream in hundreds of flavours — a staple for every Punekar's evening.",price:'₹ 20–80',img:'https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=400'},
 ];
 const gems=[
-  {emoji:'🌊',name:'Malhargad Fort',badge:'Hidden Fort',desc:'A lesser-visited 18th-century fort with fewer crowds and panoramic views of the Purandar plateau.',img:'https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?w=600'},
-  {emoji:'🌳',name:'Vetal Tekdi Hill',badge:'Nature Walk',desc:"Pune's forested hilltop — perfect for morning walks, birdwatching, and quiet city escapes.",img:'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=600'},
-  {emoji:'💧',name:'Bhimashankar Trail',badge:'Waterfalls + Trek',desc:'Dense Sahyadri forest leading to one of the 12 Jyotirlinga shrines and stunning seasonal waterfalls.',img:'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600'},
-  {emoji:'🏺',name:'Parvati Hill & Museum',badge:'Panoramic Views',desc:'A hilltop temple complex with a rich Peshwa museum and the best sunset views over old Pune.',img:'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=600'},
-  {emoji:'📸',name:'Mulshi Lake',badge:'Photography',desc:'A serene reservoir surrounded by rolling Sahyadri hills — perfect for photography and road trips.',img:'https://images.unsplash.com/photo-1501854140801-50d01698950b?w=600'},
+  {name:'Malhargad Fort',badge:'Hidden Fort',desc:'A lesser-visited 18th-century fort with fewer crowds and panoramic views of the Purandar plateau.',img:'https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?w=600'},
+  {name:'Vetal Tekdi Hill',badge:'Nature Walk',desc:"Pune's forested hilltop — perfect for morning walks, birdwatching, and quiet city escapes.",img:'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=600'},
+  {name:'Bhimashankar Trail',badge:'Waterfalls + Trek',desc:'Dense Sahyadri forest leading to one of the 12 Jyotirlinga shrines and stunning seasonal waterfalls.',img:'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600'},
+  {name:'Parvati Hill & Museum',badge:'Panoramic Views',desc:'A hilltop temple complex with a rich Peshwa museum and the best sunset views over old Pune.',img:'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=600'},
+  {name:'Mulshi Lake',badge:'Photography',desc:'A serene reservoir surrounded by rolling Sahyadri hills — perfect for photography and road trips.',img:'https://images.unsplash.com/photo-1501854140801-50d01698950b?w=600'},
 ];
 const budget=[
-  {emoji:'🌳',name:'Empress Botanical Garden',desc:'Lush botanical gardens — perfect for a peaceful picnic or evening walk',range:'Free Entry'},
-  {emoji:'📚',name:'Balgandharva Book Fair',desc:"Pune's famous book fairs with thousands of titles at massive discounts",range:'₹ 0–500 spend'},
-  {emoji:'🎬',name:'FTII Campus Walk',desc:'Explore the legendary Film and Television Institute campus — open to visitors',range:'Free'},
-  {emoji:'🏖️',name:'Khadakwasla Dam',desc:'Popular lakeside spot for groups — stunning sunset views and budget snack stalls nearby',range:'Free'},
-  {emoji:'🛒',name:'Tulsi Baug Market',desc:"Old Pune's bustling bazaar for clothes, accessories, and traditional items at low prices",range:'₹ 50–500'},
-  {emoji:'🍜',name:'FC Road Dhabas',desc:'Student-friendly eateries serving hearty Maharashtrian meals at affordable prices',range:'₹ 60–150 meal'},
-  {emoji:'🎭',name:'Bal Gandharva Rang Mandir',desc:'Affordable cultural events, plays, and classical music performances year-round',range:'₹ 100–300'},
-  {emoji:'🚵',name:'Lonavala Day Trip',desc:'Nearby hill station accessible by train — chikki, viewpoints, and waterfalls await',range:'₹ 150–300'},
+  {name:'Empress Botanical Garden',desc:'Lush botanical gardens — perfect for a peaceful picnic or evening walk',range:'Free Entry'},
+  {name:'Balgandharva Book Fair',desc:"Pune's famous book fairs with thousands of titles at massive discounts",range:'₹ 0–500 spend'},
+  {name:'FTII Campus Walk',desc:'Explore the legendary Film and Television Institute campus — open to visitors',range:'Free'},
+  {name:'Khadakwasla Dam',desc:'Popular lakeside spot for groups — stunning sunset views and budget snack stalls nearby',range:'Free'},
+  {name:'Tulsi Baug Market',desc:"Old Pune's bustling bazaar for clothes, accessories, and traditional items at low prices",range:'₹ 50–500'},
+  {name:'FC Road Dhabas',desc:'Student-friendly eateries serving hearty Maharashtrian meals at affordable prices',range:'₹ 60–150 meal'},
+  {name:'Bal Gandharva Rang Mandir',desc:'Affordable cultural events, plays, and classical music performances year-round',range:'₹ 100–300'},
+  {name:'Lonavala Day Trip',desc:'Nearby hill station accessible by train — chikki, viewpoints, and waterfalls await',range:'₹ 150–300'},
 ];
 
 const gradients=['linear-gradient(135deg,#FEF0E7,#F5C842 80%)','linear-gradient(135deg,#DFF5F1,#0A7B6C 80%)','linear-gradient(135deg,#F0EAF9,#6B3FA0 80%)','linear-gradient(135deg,#DFF5F1,#065548 80%)','linear-gradient(135deg,#FCEAF1,#C42B5A 80%)','linear-gradient(135deg,#EAF0FC,#2D4EAA 80%)'];
@@ -852,7 +849,7 @@ function renderPlaces(list){
   nr.style.display='none';
   g.innerHTML=list.map((p,i)=>`
     <div class="pc reveal">
-      <div class="pt"><img src="${p.img}" alt="${p.name}" loading="lazy"/><div class="pt-overlay"></div><span>${p.emoji}</span><div class="tb">${p.badge}</div><div class="tr">⭐ ${p.rating}</div></div>
+      <div class="pt"><img src="${p.img}" alt="${p.name}" loading="lazy"/><div class="pt-overlay"></div><div class="tb">${p.badge}</div><div class="tr">⭐ ${p.rating}</div></div>
       <div class="pb"><h3>${p.name}</h3><div class="pa">📍 ${p.area}, Pune</div><p class="pd">${p.desc.substring(0,100)}…</p>
       <div class="ptags"><span class="ptag ptag-s">${p.tags[0]}</span><span class="ptag ptag-t">${p.tags[1]}</span>${p.tags[2]?`<span class="ptag ptag-p">${p.tags[2]}</span>`:''}</div>
       <button class="view-details-btn" onclick="openModal(${p.id})">View Details →</button></div>
@@ -861,7 +858,7 @@ function renderPlaces(list){
 }
 function renderFoods(){
   document.getElementById('foodGrid').innerHTML=foods.map(f=>`
-    <div class="fc reveal"><div class="fem"><img src="${f.img}" alt="${f.name}" loading="lazy"/><div class="fem-overlay"></div><span>${f.emoji}</span></div>
+    <div class="fc reveal"><div class="fem"><img src="${f.img}" alt="${f.name}" loading="lazy"/><div class="fem-overlay"></div></div>
     <div class="fbd"><h3>${f.name}</h3><div class="fhint">${f.place}</div><div class="fdsc">${f.desc}</div><span class="fpr">${f.price}</span></div></div>`).join('');
 }
 function renderGems(){
@@ -872,7 +869,7 @@ function renderGems(){
 }
 function renderBudget(){
   document.getElementById('budgetGrid').innerHTML=budget.map(b=>`
-    <div class="bc reveal"><div class="bem">${b.emoji}</div><h3>${b.name}</h3><p>${b.desc}</p><div class="br">${b.range}</div></div>`).join('');
+    <div class="bc reveal"><h3>${b.name}</h3><p>${b.desc}</p><div class="br">${b.range}</div></div>`).join('');
 }
 
 function openModal(id){
@@ -880,7 +877,7 @@ function openModal(id){
   const i=p.id-1;
   const mTop=document.getElementById('mTop');
   mTop.style.backgroundImage=`url(${p.img})`;
-  mTop.innerHTML=`<img src="${p.img}" alt="${p.name}"/><div class="mtop-overlay"></div><span id="mEmoji">${p.emoji}</span><button class="mclose" onclick="closeModal()">✕</button><div class="mbdg" id="mBdg">${p.badge}</div>`;
+  mTop.innerHTML=`<img src="${p.img}" alt="${p.name}"/><div class="mtop-overlay"></div><button class="mclose" onclick="closeModal()">✕</button><div class="mbdg" id="mBdg">${p.badge}</div>`;
   document.getElementById('mBdg').style.color=i%2===0?'var(--saffron)':'var(--teal)';
   document.getElementById('mTitle').textContent=p.name;
   document.getElementById('mArea').textContent='📍 '+p.area+', Pune';
